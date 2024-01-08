@@ -6,11 +6,11 @@ namespace Policy.Data.Entities
 {
     public class Plan : BaseEntity
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public decimal CoverageLimit { get; set; }
         public string? CoverageRegion { get; set; }
-        public IQueryable<Benefit>? Benefits { get; set; }
+        public ICollection<Benefit>? Benefits { get; set; }
         public int? PolicyId { get; set; }
         public Policy? Policy { get; set; }
         public string CurrencyCode  { get; set; }

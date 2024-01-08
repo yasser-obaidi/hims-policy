@@ -2,7 +2,8 @@
 {
     public enum LimitType
     {
-        Monetary =0,
-        Visit = 1
+        None = 0,
+        Monetary ,
+        Visit 
     }
 }

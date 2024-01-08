@@ -1,18 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using Policy.Data;
+using Policy.Data.Services;
+using Policy.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Add services to the container.
-var connStr = "server=192.168.1.19;port=3306;user=user;password=123456;database=policy;Convert Zero Datetime=True;";
+var connStr = "server=192.168.1.3;port=3306;user=user;password=123456;database=policy;Convert Zero Datetime=True;";
 builder.Services.AddDbContext<Context>(opt => opt.UseMySQL(
     connStr
   ));
-builder.Services.AddControllers();
+builder.Services
+    .AddRepositories()
+    .AddServices()
+    .AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 

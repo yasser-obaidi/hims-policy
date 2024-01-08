@@ -108,7 +108,7 @@ namespace Policy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BenefitRule");
+                    b.ToTable("BenefitRules");
                 });
 
             modelBuilder.Entity("Policy.Data.Entities.BenefitType", b =>
@@ -141,7 +141,7 @@ namespace Policy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BenefitType");
+                    b.ToTable("BenefitTypes");
                 });
 
             modelBuilder.Entity("Policy.Data.Entities.Category", b =>
@@ -263,7 +263,7 @@ namespace Policy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Policy");
+                    b.ToTable("Policies");
                 });
 
             modelBuilder.Entity("Policy.Data.Entities.Benefit", b =>

@@ -11,8 +11,8 @@ using Policy.Data;
 namespace Policy.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240105154543_BenefitType_Nullable")]
-    partial class BenefitType_Nullable
+    [Migration("20240108121514_addedBenefitRuleandType")]
+    partial class addedBenefitRuleandType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace Policy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BenefitRule");
+                    b.ToTable("BenefitRules");
                 });
 
             modelBuilder.Entity("Policy.Data.Entities.BenefitType", b =>
@@ -144,7 +144,7 @@ namespace Policy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BenefitType");
+                    b.ToTable("BenefitTypes");
                 });
 
             modelBuilder.Entity("Policy.Data.Entities.Category", b =>
@@ -266,7 +266,7 @@ namespace Policy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Policy");
+                    b.ToTable("Policies");
                 });
 
             modelBuilder.Entity("Policy.Data.Entities.Benefit", b =>

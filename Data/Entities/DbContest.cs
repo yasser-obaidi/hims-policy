@@ -10,13 +10,18 @@ namespace Policy.Data
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Benefit> Benefits { get; set; }
+        public DbSet<BenefitRule> BenefitRules { get; set; }
+        public DbSet<BenefitType> BenefitTypes { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<Entities.Policy> Policies { get; set; }
+
+
         public Context() : base() { }
         public Context(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=192.168.1.19;port=3306;user=user;password=123456;database=policy;Convert Zero Datetime=True;");
+            optionsBuilder.UseMySQL("server=192.168.1.3;port=3306;user=user;password=123456;database=policy;Convert Zero Datetime=True;");
 
         }
         public override int SaveChanges()
@@ -62,6 +67,8 @@ namespace Policy.Data
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             modelBuilder.ApplyConfiguration(new BenefitConfigurations());
             modelBuilder.ApplyConfiguration(new PlanConfigurations());
+            modelBuilder.ApplyConfiguration(new BenefitRuleConfigurations());
+            modelBuilder.ApplyConfiguration(new BenefitTypeConfigurations());
             
             base.OnModelCreating(modelBuilder);
         }

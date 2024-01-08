@@ -7,10 +7,10 @@ namespace Policy.Data.Entities
 {
     public class Benefit : BaseEntity
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public int PlanId { get; set; }
+        public int? PlanId { get; set; }
         public Plan Plan {  get; set; }
         public string? Description { get; set; }
         public int BenefitTypeId {  get; set; }
