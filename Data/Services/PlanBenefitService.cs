@@ -84,7 +84,7 @@ namespace Policy.Data.Services
 
         public async Task<PlanOutputModelSimple> CopyExistPlan(PlanCopyExistModel model)
         {
-            if (model.ExistingPlanId == null || model.Name == null)
+            if (model?.ExistingPlanId == null || model.Name == null)
             {
                 throw new Exception("check input");
 
@@ -138,14 +138,14 @@ namespace Policy.Data.Services
              return ( await (await _unitOfWork.PlanRepo.FindByCondition(plan=>plan.Id == planId)).FirstOrDefaultAsync())?.Benefits?.MapTo<List<BenefitOutputModelSimple>>();
         }
 
-        public Task<PlanOutputModelDetailed> GetPlanById(int Id)
+        public async Task<PlanOutputModelDetailed> GetPlanById(int Id)
         {
-            throw new NotImplementedException();
+           return (await _unitOfWork.PlanRepo.FindById(Id)).MapTo<PlanOutputModelDetailed>();
         }
 
-        public Task<IList<PlanOutputModelSimple>> GetPlanByIds(int[] planIds)
+        public async Task<IList<PlanOutputModelSimple>> GetPlanByIds(int[] planIds)
         {
-            throw new NotImplementedException();
+            return await (await _unitOfWork.PlanRepo.FindByCondition(plan => planIds.Contains((int)plan.Id))).MapTo<PlanOutputModelSimple>().ToListAsync();
         }
 
         public Task InsertBenefit(InsertBenefitToPlanModel Model)

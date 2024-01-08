@@ -14,6 +14,19 @@ namespace Policy.Controllers
         {
             _planBenefitService = policyService;
         }
+        [HttpGet("PlanByIds")]
+        public async Task<IActionResult> GetPlans( [FromHeader]int[] Ids)
+        {
+            try
+            {
+                 
+                return Ok(await _planBenefitService.GetPlanByIds(Ids));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(GetErrorMessage(ex));
+            }
+        }
         [HttpPost("Plan")]
         public async Task<IActionResult> PostPlan(PlanInputModel model)
         {
