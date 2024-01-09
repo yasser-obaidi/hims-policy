@@ -30,6 +30,16 @@ namespace Policy.Data.Models
         public int? PolicyId { get; set; }
         public IList<BenefitInputModel>? Benefits { get; set; }
     }
+    public class PlanUpdateModel
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public decimal? CoverageLimit { get; set; }
+        public string? CoverageRegion { get; set; }
+        public string? CurrencyCode { get; set; }
+        public string? AlternativeName { get; set; }
+        public bool? IsActive { get; set; }
+    }
     public class PlanCopyExistModel
     {
         public int ExistingPlanId { get; set; }

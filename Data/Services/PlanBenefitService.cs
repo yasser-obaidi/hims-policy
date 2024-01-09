@@ -160,12 +160,23 @@ namespace Policy.Data.Services
             
         }
 
-        public Task UpdateBenefit(BenefitUpdateModel model)
+        public async Task UpdateBenefit(BenefitUpdateModel model)
         {
-            throw new NotImplementedException();
+            if (model?.Id==null )
+            {
+                throw new Exception("Please check input");
+
+            }
+            var benefit = await _unitOfWork.BenefitRepo.FindById(model.Id);
+            benefit.Description = string.IsNullOrWhiteSpace(model.Description)? benefit.Description : model.Description ; 
+            benefit.CategoryId = model?.CategoryId == null? benefit.CategoryId : model.CategoryId;
+            benefit.BenefitTypeId = model?.BenefitTypeId == null? benefit.BenefitTypeId : model.BenefitTypeId;
+            benefit.MemberCoPaymentPercentage = model?.MemberCoPaymentPercentage == null? benefit.MemberCoPaymentPercentage : model.MemberCoPaymentPercentage;
+            benefit.BenefitRuleId = model?.BenefitRuleId == null? benefit.BenefitRuleId : model.BenefitRuleId;
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task UpdatePlan(PlanInputModel model)
+        public Task UpdatePlan(PlanUpdateModel model)
         {
             throw new NotImplementedException();
         }
