@@ -23,7 +23,7 @@ namespace Policy.Data.Services
 
         Task AddPlanAsync(PlanInputModel Model);
 
-        Task UpdatePlan(PlanInputModel model);
+        Task UpdatePlan(PlanUpdateModel model);
 
         Task InsertBenefit(InsertBenefitToPlanModel Model);
 
