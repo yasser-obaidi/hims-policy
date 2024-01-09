@@ -148,9 +148,16 @@ namespace Policy.Data.Services
             return await (await _unitOfWork.PlanRepo.FindByCondition(plan => planIds.Contains((int)plan.Id))).MapTo<PlanOutputModelSimple>().ToListAsync();
         }
 
-        public Task InsertBenefit(InsertBenefitToPlanModel Model)
+        public async Task InsertBenefit(InsertBenefitToPlanModel Model)
         {
-            throw new NotImplementedException();
+            if (Model?.PlanId == null || !Model.Benefits.Any() )
+            {
+                throw new Exception("Please check input");
+            }
+            var plan = await _unitOfWork.PlanRepo.FindById(Model.PlanId);
+            plan?.Benefits?.ToList().AddRange(Model.Benefits.MapTo<List<Benefit>>());
+            await _unitOfWork.SaveChangesAsync();
+            
         }
 
         public Task UpdateBenefit(BenefitUpdateModel model)
