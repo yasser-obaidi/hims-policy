@@ -44,7 +44,9 @@ namespace Policy.Data.Services
 
         public async Task AddBenefitRule(BenefitRuleInputModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Name) || model.LimitType == null || model.LimitType == LimitType.None )
+            if (string.IsNullOrWhiteSpace(model.Name) 
+                || model.LimitType == null 
+                || model.LimitType == LimitType.None )
             {
                 throw new Exception("check input");
             }
@@ -74,7 +76,12 @@ namespace Policy.Data.Services
 
         public async Task AddPlanAsync(PlanInputModel Model)
         {
-            if (string.IsNullOrWhiteSpace(Model.Name) || Model.CoverageLimit == null || string.IsNullOrWhiteSpace(Model.CoverageRegion) || string.IsNullOrWhiteSpace(Model.CurrencyCode) || string.IsNullOrWhiteSpace(Model.AlternativeName) || Model.IsActive == null )
+            if (string.IsNullOrWhiteSpace(Model.Name) 
+                || (Model.CoverageLimit == null) 
+                || string.IsNullOrWhiteSpace(Model.CoverageRegion) 
+                || string.IsNullOrWhiteSpace(Model.CurrencyCode) 
+                || string.IsNullOrWhiteSpace(Model.AlternativeName) 
+                || Model.IsActive == null )
             {
                 throw new Exception("check input");
             }
