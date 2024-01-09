@@ -176,9 +176,21 @@ namespace Policy.Data.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task UpdatePlan(PlanUpdateModel model)
+        public async Task UpdatePlan(PlanUpdateModel model)
         {
-            throw new NotImplementedException();
+            if(model?.Id==null )
+            {
+                throw new Exception("Please check input");
+            }
+            var plan = await _unitOfWork.PlanRepo.FindById(model.Id);
+            plan.Name = string.IsNullOrWhiteSpace(model.Name) ? plan.Name: model.Name;
+            plan.CoverageLimit = model.CoverageLimit == null ? plan.CoverageLimit : (decimal)model.CoverageLimit;
+            plan.CoverageRegion = string.IsNullOrWhiteSpace(model.CoverageRegion) ? plan.CoverageRegion: model.CoverageRegion;
+            plan.CurrencyCode = string.IsNullOrWhiteSpace(model.CurrencyCode) ? plan.CurrencyCode: model.CurrencyCode;
+            plan.AlternativeName = string.IsNullOrWhiteSpace(model.AlternativeName) ? plan.AlternativeName: model.AlternativeName;
+            plan.IsActive = model.IsActive == null ? plan.IsActive : (bool)model.IsActive;
+            await _unitOfWork.SaveChangesAsync();
+
         }
     }
 }
