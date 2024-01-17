@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Policy.Data.Repo;
 using Policy.Data.Services;
+using Policy.Logger;
 using Policy.Repo;
 
 namespace Policy.Helper
@@ -53,6 +54,13 @@ namespace Policy.Helper
                 
 
             });
+        }
+
+        internal static ILoggingBuilder AddDbLogger(this ILoggingBuilder builder,Action<DbLoggerOptions> configure)
+        {
+            builder.Services.AddSingleton<ILoggerProvider, DbLoggerProvider>();
+            builder.Services.Configure(configure);
+            return builder;
         }
 
 

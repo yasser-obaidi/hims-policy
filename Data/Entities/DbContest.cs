@@ -4,10 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using Policy.Data.Entities;
 using System.Security.Principal;
 using Policy.Data.Entities.Commen;
+using Policy.Logger;
 namespace Policy.Data
 {
     public class Context : DbContext
     {
+        public DbSet<SysLog> SysLogs { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Benefit> Benefits { get; set; }
         public DbSet<BenefitRule> BenefitRules { get; set; }
