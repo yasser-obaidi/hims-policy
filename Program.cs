@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Policy.Data;
 using Policy.Data.Services;
 using Policy.Helper;
+using Policy.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,9 @@ builder.Services.AddSwagger();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
 
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
 
 
