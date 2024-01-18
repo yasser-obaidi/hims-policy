@@ -2,6 +2,7 @@
 using Policy.Data;
 using Policy.Data.Entities;
 using Policy.Data.Repo;
+using Policy.Data.Services;
 
 namespace Policy.Repo
 {
@@ -11,6 +12,8 @@ namespace Policy.Repo
         public IPlanRepo PlanRepo {get;}
         public IBenefitRepo BenefitRepo {get;}
         public ICategoryRepo CategoryRepo { get;}
+        public IUserManagement UserManagement { get; }
+
         void Dispose();
         Task<int> SaveChangesAsync();
 
@@ -24,14 +27,16 @@ namespace Policy.Repo
         public IBenefitRepo BenefitRepo { get; }
 
         public ICategoryRepo CategoryRepo { get; }
+        public IUserManagement UserManagement { get; }
 
-        public UnitOfWork(Context context)
+        public UnitOfWork(Context context,IUserManagement userManagement)
         {
             _db = context;
             PolicyRepo = new PolicyRepo(context);
             PlanRepo = new PlanRepo(context);
             BenefitRepo = new BenefitRepo(context);
             CategoryRepo = new CategoryRepo(context);
+            UserManagement = userManagement;
 
         }
         public async Task<int> SaveChangesAsync()

@@ -5,6 +5,7 @@ using Policy.Data.Entities;
 using System.Security.Principal;
 using Policy.Data.Entities.Commen;
 using Policy.Logger;
+using Policy.Data.Services;
 namespace Policy.Data
 {
     public class Context : DbContext
@@ -16,10 +17,13 @@ namespace Policy.Data
         public DbSet<BenefitType> BenefitTypes { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Entities.Policy> Policies { get; set; }
+        private readonly IUserManagement _userManagement;
 
 
         public Context() : base() { }
-        public Context(DbContextOptions options) : base(options) { }
+        public Context(DbContextOptions options, IUserManagement userManagement) : base(options) {
+            _userManagement = userManagement;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -46,6 +50,7 @@ namespace Policy.Data
         }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            var userId = await _userManagement.GetUserId();
             foreach (var entry in ChangeTracker.Entries<BaseEntity>().ToList())
             {
                 switch (entry.State)
@@ -53,10 +58,13 @@ namespace Policy.Data
                     case EntityState.Added:
                         entry.Entity.CreatedAt = DateTime.Now;
                         entry.Entity.UpdatedAt = DateTime.Now;
+                        entry.Entity.CreatedBy = userId;
+                        entry.Entity.UpdatedBy = userId;
                         break;
 
                     case EntityState.Modified:
                         entry.Entity.UpdatedAt = DateTime.Now;
+                        entry.Entity.UpdatedBy = userId;
                         break;
                 }
             }

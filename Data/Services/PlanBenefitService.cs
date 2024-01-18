@@ -70,7 +70,9 @@ namespace Policy.Data.Services
             {
                 throw new Exception("check input");
             }
-            _unitOfWork.CategoryRepo.Add(model.MapTo<Category>());
+            var category = model.MapTo<Category>();
+            category.CreatedBy = await _unitOfWork.UserManagement.GetUserId();
+            _unitOfWork.CategoryRepo.Add(category);
             await _unitOfWork.SaveChangesAsync() ;
         }
 

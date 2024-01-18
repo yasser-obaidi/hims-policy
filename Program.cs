@@ -16,6 +16,7 @@ var connStr = "server=192.168.1.3;port=3306;user=user;password=123456;database=p
 builder.Services.AddDbContext<Context>(opt => opt.UseMySQL(
     connStr
   ));
+builder.Services.AddHttpContextAccessor();
 builder.Services
     .AddRepositories()
     .AddServices()

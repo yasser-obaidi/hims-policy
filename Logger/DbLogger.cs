@@ -31,13 +31,13 @@ namespace Policy.Logger
                 return;
             }
 
-            var options = new DbContextOptionsBuilder<Context>();
-                options.UseMySQL(_dbLoggerProvider.Options.ConnectionString);
-                using Context _funddbContext = new Context(options.Options);   // we can use a other data base just for logging 
-                var logMessage = new SysLog();
-                logMessage.LogDetails = $"{logLevel.ToString()} --${eventId.Name}-- ${formatter(state, exception)}";
-                _funddbContext.SysLogs.Add(logMessage);
-                _funddbContext.SaveChanges();
+            //var options = new DbContextOptionsBuilder<Context>();
+            //    options.UseMySQL(_dbLoggerProvider.Options.ConnectionString);
+            //    using Context _funddbContext = new Context(options.Options);   // we can use a other data base just for logging 
+            //    var logMessage = new SysLog();
+            //    logMessage.LogDetails = $"{logLevel.ToString()} --${eventId.Name}-- ${formatter(state, exception)}";
+            //    _funddbContext.SysLogs.Add(logMessage);
+            //    _funddbContext.SaveChanges();
             return;
             
         }
