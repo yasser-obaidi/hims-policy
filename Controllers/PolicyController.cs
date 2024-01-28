@@ -22,8 +22,8 @@ namespace Policy.Controllers
         {
             return await _policyService.GetById(Id);
         }
-        [HttpGet("ByNames")]
-        public async Task<IActionResult> GetByNames( [FromQuery]string[] PolicyNames)
+        [HttpPost("ByNames")]
+        public async Task<IActionResult> GetByNames( [FromBody]string[] PolicyNames)
         {
             return Ok(await _policyService.ByNames(PolicyNames));
         }
