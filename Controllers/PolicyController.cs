@@ -22,6 +22,11 @@ namespace Policy.Controllers
         {
             return await _policyService.GetById(Id);
         }
+        [HttpGet("ByNames")]
+        public async Task<IActionResult> GetByNames( [FromQuery]string[] PolicyNames)
+        {
+            return Ok(await _policyService.ByNames(PolicyNames));
+        }
         private string GetErrorMessage(Exception ex)
         {
             if (ex.Message.Contains("See the inner exception for details") && ex.InnerException != null)
